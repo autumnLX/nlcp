@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>nlcp</title>
+    <script src="/static/jquery-1.11.1.min.js"></script>
+    <script src="/static/jquery.ajaxPages.js"></script>
+    <script src="/static/WdatePicker.js"></script>
+    <script src="/static/chivox.js"></script>
+    <script src="/static/uploadify/jquery.uploadify.js"></script>
+    <script src="/static/server.js"></script>
+    <script src="/static/main.js"></script>
+    <script src="/static/ui/ui.js"></script>
+    <script src="/static/ui/comboTree.js"></script>
+    <script src="/static/ui/tag.js"></script>
+    <script src="/static/ui/tag2.js"></script>
+    <script src="/static/ui/ueditor.js"></script>
+    <script src="/static/ui/select.js"></script>
+    <script src="/static/ui/radio.js"></script>
+    <script src="/static/ui/checkbox.js"></script>
+    <script src="/static/ui/textarea.js"></script>
+    <script src="/static/ui/audio.js"></script>
+    <script src="/static/ui/image.js"></script>
+    <script src="/static/ueditor/ueditor.config.js"></script>
+    <script src="/static/ueditor/ueditor.all.js"></script>
+    <script src="/static/ueditor/ueditor.expand.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/WdatePicker.css">
+    <link rel="stylesheet" type="text/css" href="/static/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="/static/uploadify.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/ui.css">
+    <link rel="stylesheet" type="text/css" href="/static/tx.css">
+    <link rel="stylesheet" type="text/css" href="/static/uploadify/uploadify.css">
+    <link rel="stylesheet" type="text/css" href="/static/ueditor/themes/default/css/ueditor.css">
+  </head>
+  <body>
+    <div id="container">
+      <div class="cover hide"></div>
+      <div style="background-color: #207d6a;height: 58px;">
+        <div class="nav">
+          <div id="logo"><span><?php echo Configure::read('customer_title')?>-阶段测评</span></div>
+          <ul>
+            <!--<li style="display: block;"><a href="#" data-chivox-event="click:menuClick&main" data-chivox-group="menu" class="active">首页</a></li>-->
+            <li name="topic_build" data-for="tkjs"><a href="javascript:window.solution.js.nlcp()" data-chivox-group="menu">能力测评</a></li>
+            <li name="online_paper" data-for="zxzj"><a href="javascript:window.solution.js.nlcp(['Sjgl'])" data-chivox-group="menu">试卷管理</a></li>
+            <li name="online_ceping" data-for="zxcp"><a href="javascript:window.solution.js.nlcp(['Cpxx', 20])" data-chivox-group="menu">测评信息</a></li>
+          </ul>
+          <ul class="nav-sub">
+            <li><a href="#" id="userName">名字</a></li>
+            <li><a href="/user/logout">退出</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <div id="left-container">
+          <ul class="subMenu" id="tkjs">
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&tkll">题库浏览</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&topic">新增题目</a></li>
+          </ul>
+          <ul class="subMenu" id="zxzj">
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&sdzj">手动组卷</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&znzj">智能组卷</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&sjgl">试卷管理</a></li>
+          </ul>
+          <ul class="subMenu" id="zxcp">
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&xjcp">新建学员测评</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&kfcp">新建开放测评</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&cpjl" id="m-cpjl">测评记录</a></li>
+          </ul>
+          <ul class="subMenu" id="sjbb">
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&cpsj">测评数据</a></li>
+          </ul>
+          <ul class="subMenu" id="jbsz">
+            <!-- <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&jgxx">机构信息</a></li> -->
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&kctx">课程体系</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&zstx">知识体系</a></li>
+            <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&jctx">教材体系</a></li>
+            <!-- <li data-chivox-group="subMenu"><a href="#" data-chivox-event="click:subMenuClick&zhsz">账号设置</a></li> -->
+          </ul>
+          <table id="znzj-info" class="table" style="margin-top: 20px;">
+            <thead>
+              <tr>
+                <th>题型</th>
+                <th>题量</th>
+                <th>总分</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>合计</td>
+                <td name="totalCount">0</td>
+                <td name="totalScore">0</td>
+              </tr>
+              <tr>
+                <td colspan="2">答题时间</td>
+                <td name="time">不限时</td>
+              </tr>
+              <tr>
+                <td colspan="2">难度</td>
+                <td name="difficulty">随机</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div id="sdzj-info" style="position: fixed;width: 180px;text-align: center">
+            <table class="table" style="margin-top: 20px;">
+              <thead>
+                <tr>
+                  <th>题型</th>
+                  <th>题量</th>
+                  <th>单题分值</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>单选题</td><td name="1-c"><span data-topic-type="1">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>多选题</td><td name="2-c"><span data-topic-type="2">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="odd">
+                  <td>判断题</td><td name="3-c"><span data-topic-type="3">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>填空题</td><td name="4-c"><span data-topic-type="4">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="odd">
+                  <td>完型填空</td><td name="5-c"><span data-topic-type="5">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>选词填空</td><td name="6-c"><span data-topic-type="6">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="odd">
+                  <td>连词成句</td><td name="7-c"><span data-topic-type="7">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>口语题</td><td name="8-c"><span data-topic-type="8">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="odd">
+                  <td>听力题</td><td name="9-c"><span data-topic-type="9">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>阅读理解</td><td name="10-c"><span data-topic-type="10">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="odd">
+                  <td>口头作文</td><td name="11-c"><span data-topic-type="11">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+                <tr class="even">
+                  <td>看图说话</td><td name="12-c"><span data-topic-type="12">0</span></td><td><input type="text" value="0"/></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2">总题量</td>
+                  <td name="sdzj-totalCount">0</td>
+                </tr>
+                <tr>
+                  <td colspan="2">总分</td>
+                  <td name="sdzj-totalScore">0</td>
+                </tr>
+              </tfoot>
+            </table>
+            <button name="ok" class="btn btn-primary" style="margin-top:10px;">预览保存</button>
+          </div>
+        </div>
+        <div id="right-container" class="main">
+          <!-- <h1>欢迎使用善学测评系统v0.1Beta版</h1>
+          <p>请点击上方菜单切换功能</p> -->
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+
+    <script>
+      var ls = {
+        userName: '老师',
+        // ManageType: 'teacher',
+        RoleType: 'teacher',
+        userId: 1
+      }
+
+      var gl = {
+        userName: '管理员',
+        ManageType: 0,
+        RoleType: 'manager',
+        userId: 1
+      }
+
+      var dl = {
+        userName: '代理',
+        ManageType: 1,
+        RoleType: 'manager',
+        userId: 1
+      }
+
+      $("#userName").data(ls)
+    </script>
+  </body>
+</html>
